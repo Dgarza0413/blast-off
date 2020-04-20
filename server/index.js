@@ -27,6 +27,9 @@ const server = new ApolloServer({
     },
     typeDefs,
     resolvers,
+    engine: {
+        apikey: process.env.APOLLO_MANAGER_APIKEY
+    },
     dataSources: () => ({
         launchAPI: new LaunchAPI(),
         userAPI: new UserAPI({ store })
