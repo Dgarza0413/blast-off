@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { size } from 'polished';
 
 import { unit, colors } from '../styles';
@@ -13,9 +13,13 @@ const avatars = [dog1, dog2, dog3];
 const maxIndex = avatars.length - 1;
 
 function pickAvatarByEmail(email: string) {
-  const charCode = email.toLowerCase().charCodeAt(0) - offset;
-  const percentile = Math.max(0, Math.min(max, charCode)) / max;
-  return avatars[Math.round(maxIndex * percentile)];
+  let chosenIndex = 0;
+  if (email) {
+    const charCode = email.toLowerCase().charCodeAt(0) - offset;
+    const percentile = Math.max(0, Math.min(max, charCode)) / max;
+    chosenIndex = Math.round(maxIndex * percentile);
+  }
+  return avatars[chosenIndex];
 }
 
 interface HeaderProps {
@@ -24,7 +28,9 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ image, children = 'Space Explorer' }) => {
-  const email = atob(localStorage.getItem('token') as string);
+  const token = localStorage.getItem('token')
+  const email = token ? atob(token) : '';
+  // const email = atob(localStorage.getItem('token') as string);
   const avatar = image || pickAvatarByEmail(email);
 
   return (

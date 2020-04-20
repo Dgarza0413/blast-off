@@ -4,28 +4,36 @@ import gql from 'graphql-tag';
 
 import { LaunchTile, Header, Button, Loading } from '../components';
 
+export const LAUNCH_TILE_DATA = gql`
+fragment LaunchTile on Launch {
+    id
+    isBooked
+    rocket {
+        id
+        name
+    }
+    mission {
+        name
+        missionPatch
+    }
+}
+`
+
 const GET_LAUNCHES = gql`
     query launchList($after: String){
         launches(after: $after){
             cursor
             hasMore
             launches {
-                id
-                isBooked
-                rocket {
-                    id
-                    name
-                }
-                mission {
-                    name
-                    missionPatch
-                }
+                ...LaunchTile
             }
         }
     }
-`
+    ${LAUNCH_TILE_DATA}
+`;
 
-const launches = () => {
+
+const Launches = () => {
     const { data, loading, error, fetchMore } = useQuery(GET_LAUNCHES);
 
     if (loading) return <Loading />;
@@ -34,7 +42,8 @@ const launches = () => {
 
     return (
         <>
-            <Header />
+            {/* <Header>Launches</Header> */}
+            {/* <Header /> */}
             {data.launches &&
                 data.launches.hasMore && (
                     <Button onClick={() =>
@@ -66,4 +75,6 @@ const launches = () => {
     );
 };
 
-export default launches;
+export default Launches;
+
+

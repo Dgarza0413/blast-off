@@ -1,4 +1,6 @@
-import { injectGlobal } from 'react-emotion';
+// import { injectGlobal } from 'react-emotion';
+// import { injectGlobal } from '@emotion/styled';
+import { injectGlobal } from 'emotion';
 
 export const unit = 8;
 export const colors = {

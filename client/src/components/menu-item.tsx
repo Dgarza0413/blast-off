@@ -1,5 +1,6 @@
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
 import { Link } from '@reach/router';
+import { css } from '@emotion/core';
 import { colors, unit } from '../styles';
 
 export const menuItemClassName = css({
