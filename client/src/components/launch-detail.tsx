@@ -14,6 +14,7 @@ const LaunchDetail: React.FC<any> = ({ id, site, rocket }: any) => (
       {rocket && rocket.name} ({rocket && rocket.type})
     </h3>
     <h5>{site}</h5>
+    {console.log(id, site, rocket)}
   </Card>
 );
 

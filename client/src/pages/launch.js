@@ -7,9 +7,12 @@ import { ActionButton } from '../containers';
 
 import { LAUNCH_TILE_DATA } from './launches';
 
+console.log(LAUNCH_TILE_DATA)
+
 export const GET_LAUNCH_DETAILS = gql`
     query LaunchDetails($launchId: ID!) {
         launch(id: $launchId){
+            isInCart @client
             site
             rocket {
                 type
@@ -31,13 +34,10 @@ const Launch = ({ launchId }) => {
 
     return (
         <>
-            <Header
-                image={
-                    data.launch && data.launch.mission && data.launch.mission.missionPatch
-                }
-            >
+            <Header image={data.launch && data.launch.mission && data.launch.mission.missionPatch} >
                 {data && data.launch && data.launch.mission && data.launch.mission.name}
             </ Header>
+            {console.log(data.launch)}
             <LaunchDetail {...data.launch} />
             <ActionButton {...data.launch} />
         </>

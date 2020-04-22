@@ -6,6 +6,7 @@ import { LaunchTile, Header, Button, Loading } from '../components';
 
 export const LAUNCH_TILE_DATA = gql`
 fragment LaunchTile on Launch {
+    __typename
     id
     isBooked
     rocket {
@@ -19,7 +20,7 @@ fragment LaunchTile on Launch {
 }
 `
 
-const GET_LAUNCHES = gql`
+export const GET_LAUNCHES = gql`
     query launchList($after: String){
         launches(after: $after){
             cursor
@@ -40,10 +41,17 @@ const Launches = () => {
     if (error) return <p>ERROR</p>;
     if (!data) return <p>Not found</p>;
 
+    console.log(fetchMore)
+
     return (
         <>
-            {/* <Header>Launches</Header> */}
-            {/* <Header /> */}
+            <Header />
+            {console.log(data)}
+            {data.launches &&
+                data.launches.launches &&
+                data.launches.launches.map(launch => (
+                    <LaunchTile key={launch.id} launch={launch} />
+                ))}
             {data.launches &&
                 data.launches.hasMore && (
                     <Button onClick={() =>

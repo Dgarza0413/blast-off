@@ -29,7 +29,8 @@ const Profile = () => {
     if (data === undefined) return <p>ERROR</p>
     return (
         <>
-            {/* <Header>My Trips</Header> */}
+            <Header>My Trips</Header>
+            {console.log(data)}
             {data.me && data.me.trips.length ? (
                 data.me.trips.map(launch => (
                     <LaunchTile key={launch.id} launch={launch} />
