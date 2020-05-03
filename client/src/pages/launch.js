@@ -7,8 +7,6 @@ import { ActionButton } from '../containers';
 
 import { LAUNCH_TILE_DATA } from './launches';
 
-console.log(LAUNCH_TILE_DATA)
-
 export const GET_LAUNCH_DETAILS = gql`
     query LaunchDetails($launchId: ID!) {
         launch(id: $launchId){
@@ -37,7 +35,6 @@ const Launch = ({ launchId }) => {
             <Header image={data.launch && data.launch.mission && data.launch.mission.missionPatch} >
                 {data && data.launch && data.launch.mission && data.launch.mission.name}
             </ Header>
-            {console.log(data.launch)}
             <LaunchDetail {...data.launch} />
             <ActionButton {...data.launch} />
         </>
